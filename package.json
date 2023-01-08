@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/Campaign.test.js"
+    "test": "mocha tests/Campaign.test.js",
+    "dev": "next dev"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "fs-extra": "^10.0.0",
     "ganache-cli": "^6.12.2",
     "mocha": "^9.1.2",
+    "next": "^12.3.4",
     "solc": "^0.4.17",
     "web3": "^1.6.0"
   }
