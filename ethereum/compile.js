@@ -2,6 +2,9 @@ const path = require("path");
 const solc = require("solc");
 const fs = require("fs-extra");
 
+// Replace the directory "build" everytime the contract is compiled
+// Containing the new compiled contracts
+
 const buildPath = path.resolve(__dirname, "build");
 fs.removeSync(buildPath);
 
