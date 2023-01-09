@@ -3,8 +3,8 @@ const Web3 = require("web3");
 const compiledFactory = require("./build/CampaignFactory.json");
 
 const provider = new HDWalletProvider(
-  "Change the seed phrase",
-  "Change the API endpoint, such as infura"
+  "Seed phrase here, not your keys not your coins :D",
+  "API endpoint here (such as infura)"
 );
 const web3 = new Web3(provider);
 
