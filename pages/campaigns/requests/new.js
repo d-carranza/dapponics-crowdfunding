@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button, Message, Input } from "semantic-ui-react";
-import Campaign from "../../../../web3/campaign";
-import web3 from "../../../../web3/web3";
-import { Link, Router } from "../../../../routes";
+import Campaign from "../../../ethereum/campaign";
+import web3 from "../../../ethereum/web3";
+import { Link, Router } from "../../../routes";
 import Layout from "../../../components/Layout";
 
 class RequestNew extends Component {
@@ -10,8 +10,8 @@ class RequestNew extends Component {
     value: "",
     description: "",
     recipient: "",
-    errorMessage: "",
     loading: false,
+    errorMessage: "",
   };
 
   static async getInitialProps(props) {
@@ -26,22 +26,20 @@ class RequestNew extends Component {
     const campaign = Campaign(this.props.address);
     const { description, value, recipient } = this.state;
 
-    this.setState({ errorMessage: "", loading: true });
+    this.setState({ loading: true, errorMessage: "" });
 
     try {
       const accounts = await web3.eth.getAccounts();
-
       await campaign.methods
         .createRequest(description, web3.utils.toWei(value, "ether"), recipient)
         .send({ from: accounts[0] });
-
       Router.pushRoute(`/campaigns/${this.props.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
-
     this.setState({ loading: false });
   };
+
   render() {
     return (
       <Layout>
@@ -76,7 +74,7 @@ class RequestNew extends Component {
             />
           </Form.Field>
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary>
+          <Button primary loading={this.state.loading}>
             Create!
           </Button>
         </Form>

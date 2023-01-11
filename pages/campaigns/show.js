@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import Layout from "../../components/Layout";
-import Campaign from "../../../web3/campaign";
 import { Card, Grid, Button } from "semantic-ui-react";
-import web3 from "../../../web3/web3";
+import Layout from "../../components/Layout";
+import Campaign from "../../ethereum/campaign";
+import web3 from "../../ethereum/web3";
 import ContributeForm from "../../components/ContributeForm";
-import { Link } from "../../../routes";
+import { Link } from "../../routes";
 
 class CampaignShow extends Component {
   static async getInitialProps(props) {
     const campaign = Campaign(props.query.address);
+
     const summary = await campaign.methods.getSummary().call();
+
     return {
       address: props.query.address,
       minimumContribution: summary[0],
@@ -28,6 +30,7 @@ class CampaignShow extends Component {
       requestsCount,
       approversCount,
     } = this.props;
+
     const items = [
       {
         header: manager,
@@ -40,25 +43,25 @@ class CampaignShow extends Component {
         header: minimumContribution,
         meta: "Minimum Contribution (wei)",
         description:
-          "You must contribure at least this much wei to become an approver",
+          "You must contribute at least this much wei to become an approver",
       },
       {
         header: requestsCount,
         meta: "Number of Requests",
         description:
-          "A requests tries to withdraw money from the contract. Requests must be aproved by approvers",
+          "A request tries to withdraw money from the contract. Requests must be approved by approvers",
       },
       {
         header: approversCount,
         meta: "Number of Approvers",
         description:
-          "Number of people who have already donated to the campaign",
+          "Number of people who have already donated to this campaign",
       },
       {
         header: web3.utils.fromWei(balance, "ether"),
         meta: "Campaign Balance (ether)",
         description:
-          "The balance is how much money this campaign has left to spend",
+          "The balance is how much money this campaign has left to spend.",
       },
     ];
 
@@ -76,6 +79,7 @@ class CampaignShow extends Component {
               <ContributeForm address={this.props.address} />
             </Grid.Column>
           </Grid.Row>
+
           <Grid.Row>
             <Grid.Column>
               <Link route={`/campaigns/${this.props.address}/requests`}>

@@ -1,19 +1,17 @@
 import React, { Component } from "react";
-import Layout from "../../../components/Layout";
-import { Link } from "../../../../routes";
 import { Button, Table } from "semantic-ui-react";
-import Campaign from "../../../../web3/campaign";
+import { Link } from "../../../routes";
+import Layout from "../../../components/Layout";
+import Campaign from "../../../ethereum/campaign";
 import RequestRow from "../../../components/RequestRow";
 
 class RequestIndex extends Component {
   static async getInitialProps(props) {
     const { address } = props.query;
     const campaign = Campaign(address);
-
     const requestCount = await campaign.methods.getRequestsCount().call();
     const approversCount = await campaign.methods.approversCount().call();
 
-    // Fancy javascript .fill()
     const requests = await Promise.all(
       Array(parseInt(requestCount))
         .fill()
@@ -38,11 +36,13 @@ class RequestIndex extends Component {
       );
     });
   }
+
   render() {
     const { Header, Row, HeaderCell, Body } = Table;
+
     return (
       <Layout>
-        <h3>Pending Requests</h3>
+        <h3>Requests</h3>
         <Link route={`/campaigns/${this.props.address}/requests/new`}>
           <a>
             <Button primary floated="right" style={{ marginBottom: 10 }}>

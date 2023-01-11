@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { Card, Button } from "semantic-ui-react";
-import factory from "../../web3/factory";
+import factory from "../ethereum/factory";
 import Layout from "../components/Layout";
-import { Link } from "../../routes";
+import { Link } from "../routes";
 
 class CampaignIndex extends Component {
-  // Next server getInitialProps() data loading instead of componentDidMount()
   static async getInitialProps() {
     const campaigns = await factory.methods.getDeployedCampaigns().call();
 
     return { campaigns };
   }
-
   renderCampaigns() {
     const items = this.props.campaigns.map((address) => {
       return {
@@ -24,10 +22,8 @@ class CampaignIndex extends Component {
         fluid: true,
       };
     });
-
     return <Card.Group items={items} />;
   }
-
   render() {
     return (
       <Layout>
@@ -37,7 +33,7 @@ class CampaignIndex extends Component {
             <a>
               <Button
                 floated="right"
-                content="Create Camaign"
+                content="Create Campaign"
                 icon="add circle"
                 primary
               />
