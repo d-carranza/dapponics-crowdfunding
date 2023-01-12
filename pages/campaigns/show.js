@@ -36,26 +36,26 @@ class CampaignShow extends Component {
         header: manager,
         meta: "Address of Manager",
         description:
-          "The manager created this campaign and can create requests to withdraw money",
+          "The manager created this campaign and can create requests to withdraw money.",
         style: { overflowWrap: "break-word" },
       },
       {
         header: minimumContribution,
         meta: "Minimum Contribution (wei)",
         description:
-          "You must contribute at least this much wei to become an approver",
+          "You must contribute at least this much wei to become an approver.",
       },
       {
         header: requestsCount,
         meta: "Number of Requests",
         description:
-          "A request tries to withdraw money from the contract. Requests must be approved by approvers",
+          "A request tries to withdraw money from the contract. Requests must be approved by approvers.",
       },
       {
         header: approversCount,
         meta: "Number of Approvers",
         description:
-          "Number of people who have already donated to this campaign",
+          "Number of people who have already donated to this campaign.",
       },
       {
         header: web3.utils.fromWei(balance, "ether"),
